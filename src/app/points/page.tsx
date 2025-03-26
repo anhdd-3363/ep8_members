@@ -15,6 +15,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import IconButton from "@mui/material/IconButton";
 
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { jaJP } from "@mui/x-data-grid/locales";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const columns: GridColDef<(typeof rows)[number]>[] = [
@@ -28,27 +29,32 @@ const columns: GridColDef<(typeof rows)[number]>[] = [
   {
     field: "name",
     headerName: "名前",
-    flex: 0.7,
-  },
-  {
-    field: "dob",
-    headerName: "生年月日",
-    flex: 0.5,
+    flex: 1,
   },
   {
     field: "position",
     headerName: "ポジション",
-    flex: 0.7,
+    flex: 1,
   },
   {
-    field: "jlpt",
-    headerName: "JLPT",
-    flex: 0.3,
+    field: "plusPoint",
+    headerName: "プラスポイント",
+    headerAlign: "center",
+    align: "center",
+    renderCell: (params) => (
+      <p className="text-green-600 font-bold">{params.value}</p>
+    ),
+    flex: 1,
   },
   {
-    field: "progos",
-    headerName: "PROGOS",
-    flex: 0.3,
+    field: "minusPoint",
+    headerName: "マイナスポイント",
+    headerAlign: "center",
+    align: "center",
+    renderCell: (params) => (
+      <p className="text-red-500 font-bold">{params.value}</p>
+    ),
+    flex: 1,
   },
   {
     field: "action",
@@ -67,10 +73,9 @@ const columns: GridColDef<(typeof rows)[number]>[] = [
 const fakeData = {
   id: 1,
   name: "Tran Ba Trong",
-  dob: "1990-11-21",
   position: "BrSE / Backend Engineer",
-  jlpt: "N2",
-  progos: "B2 High",
+  plusPoint: "+50",
+  minusPoint: "-100",
 };
 
 const rows = Array.from({ length: 10 }, (_, index) => ({
@@ -80,7 +85,7 @@ const rows = Array.from({ length: 10 }, (_, index) => ({
 
 const drawerWidth = 240;
 
-export default function Home() {
+export default function Points() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -108,7 +113,7 @@ export default function Home() {
                 alt="logo"
                 priority
               />
-              <Typography color="text.primary">ユーザー一覧</Typography>
+              <Typography color="text.primary">ポイント</Typography>
             </Breadcrumbs>
           </Box>
           <Box className="flex items-center">
@@ -123,7 +128,7 @@ export default function Home() {
             </Box>
             <Box className="ml-2">
               <p className="ml-1">{session?.user?.name}</p>
-              <Button color="primary" onClick={() => signOut()} size="small">
+              <Button color="primary" size="small" onClick={() => signOut()}>
                 ログアウト
               </Button>
             </Box>
@@ -131,11 +136,12 @@ export default function Home() {
         </Box>
         <Box className="mt-5">
           <Typography variant="h5" color="#6E4AF2" sx={{ fontWeight: "600" }}>
-            ユーザー一覧
+            ポイント
           </Typography>
         </Box>
         <Box sx={{ height: 550, marginTop: 2 }}>
           <DataGrid
+            localeText={jaJP.components.MuiDataGrid.defaultProps.localeText}
             rows={rows}
             columns={columns}
             initialState={{

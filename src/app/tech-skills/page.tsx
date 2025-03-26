@@ -12,75 +12,10 @@ import AppBar from "@mui/material/AppBar";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Typography from "@mui/material/Typography";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import IconButton from "@mui/material/IconButton";
-
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-
-const columns: GridColDef<(typeof rows)[number]>[] = [
-  {
-    field: "id",
-    headerName: "No",
-    headerAlign: "center",
-    align: "center",
-    width: 50,
-  },
-  {
-    field: "name",
-    headerName: "名前",
-    flex: 0.7,
-  },
-  {
-    field: "dob",
-    headerName: "生年月日",
-    flex: 0.5,
-  },
-  {
-    field: "position",
-    headerName: "ポジション",
-    flex: 0.7,
-  },
-  {
-    field: "jlpt",
-    headerName: "JLPT",
-    flex: 0.3,
-  },
-  {
-    field: "progos",
-    headerName: "PROGOS",
-    flex: 0.3,
-  },
-  {
-    field: "action",
-    headerName: "アクション",
-    headerAlign: "center",
-    renderCell: () => (
-      <IconButton>
-        <VisibilityIcon />
-      </IconButton>
-    ),
-    align: "center",
-    flex: 0.5,
-  },
-];
-
-const fakeData = {
-  id: 1,
-  name: "Tran Ba Trong",
-  dob: "1990-11-21",
-  position: "BrSE / Backend Engineer",
-  jlpt: "N2",
-  progos: "B2 High",
-};
-
-const rows = Array.from({ length: 10 }, (_, index) => ({
-  ...fakeData,
-  id: index + 1,
-}));
 
 const drawerWidth = 240;
 
-export default function Home() {
+export default function TechSkills() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -108,7 +43,7 @@ export default function Home() {
                 alt="logo"
                 priority
               />
-              <Typography color="text.primary">ユーザー一覧</Typography>
+              <Typography color="text.primary">情報技術</Typography>
             </Breadcrumbs>
           </Box>
           <Box className="flex items-center">
@@ -131,21 +66,8 @@ export default function Home() {
         </Box>
         <Box className="mt-5">
           <Typography variant="h5" color="#6E4AF2" sx={{ fontWeight: "600" }}>
-            ユーザー一覧
+            情報技術
           </Typography>
-        </Box>
-        <Box sx={{ height: 550, marginTop: 2 }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: {
-                  pageSize: 10,
-                },
-              },
-            }}
-          />
         </Box>
       </Box>
     </Box>
